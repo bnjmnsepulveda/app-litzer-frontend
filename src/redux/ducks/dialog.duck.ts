@@ -23,9 +23,7 @@ const dialogReducer = (state = initialState, action: any) => {
             const payload = action.payload
             return {
                 showDialog: true,
-                title: payload.title,
-                message: payload.message,
-                payload: payload.payload
+                ...payload
             }
         case CLOSE_DIALOG:
             return {

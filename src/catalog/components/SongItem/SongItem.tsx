@@ -11,13 +11,11 @@ export default function SongItem({ song }) {
 
     const dispatch = useDispatch()
 
-    const handleClick = (song) => {
-        dispatch(openDialog({
-            title: 'Add to Playlist',
-            message: `Do you want to add ${song.name} to queque playlist`,
-            payload: song
-        }))
-    }
+    const handleClick = (song) => dispatch(openDialog({
+        title: 'Add to Playlist',
+        message: `Do you want to add ${song.name} to queque playlist`,
+        payload: song
+    }))
 
     return (
         <ListItem>

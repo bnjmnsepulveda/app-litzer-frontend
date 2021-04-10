@@ -3,6 +3,7 @@ import AcceptDialog from '../../../ui/AcceptDialog/AcceptDialog';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { closeDialog } from '../../../redux/ducks/dialog.duck';
+import { addSong } from '../../../redux/ducks/my-queque.duck';
 
 export default function AddSongDialog() {
 
@@ -10,7 +11,7 @@ export default function AddSongDialog() {
   const dispatch = useDispatch()
 
   const handleAccept = (payload) => {
-    console.log('accept', payload)
+    dispatch(addSong(payload))
     dispatch(closeDialog())
   }
 

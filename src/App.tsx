@@ -1,24 +1,22 @@
 import React from 'react';
 import './App.css';
-import AlbumList from './catalog/components/AlbumList/AlbumList';
-import Album from './catalog/components/Album/Album';
 import configureStore from './redux/store';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
+import { BrowserRouter as Router } from "react-router-dom";
+import CatalogRouter from './router/CatalogRouter';
 
 // redux store
 const store = configureStore;
-store.subscribe(() => {
-  console.log(`Redux-state`, store.getState())
-})
+store.subscribe(() => console.log(`Redux-state`, store.getState()))
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
-        {/* <AlbumList></AlbumList> */}
-        <Album></Album>
-      </Provider>
-
+      <ReduxProvider store={store}>
+        <Router>
+          <CatalogRouter></CatalogRouter>
+        </Router>
+      </ReduxProvider>
     </div>
   );
 }
