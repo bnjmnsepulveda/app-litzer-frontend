@@ -1,14 +1,19 @@
 const ADD_SONG = 'app-litzer-frontend/my-queque/ADD_SONG';
 
-export const addSong = (payload: MyQueque) => ({
+export const addSong = (payload: Song) => ({
     type: ADD_SONG,
     payload
 })
 
-export interface MyQueque {
+export interface Song {
     id: string;
     name: string;
     duration: string;
+}
+
+export interface MyQueque {
+    addedAt: Date;
+    song: Song;
 }
 
 const initialState: MyQueque[] = []
@@ -17,7 +22,12 @@ const myQuequeReducer = (state = initialState, action: { type: string; payload: 
 
     switch (action.type) {
         case ADD_SONG: {
-            state.push(action.payload)
+            const payload = action.payload
+            const addSong = {
+                addedAt: new Date(),
+                song: payload
+            }
+            state.push(addSong)
             return state
         }
         default:
