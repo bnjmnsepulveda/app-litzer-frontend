@@ -1,46 +1,26 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import AcceptDialog from '../../../ui/AcceptDialog/AcceptDialog';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { closeDialog } from '../../../redux/ducks/dialog.duck';
 
-export default function AddSongDialog({ song }) {
+export default function AddSongDialog() {
 
-  const [open, setOpen] = React.useState(false);
+  const dialog = useSelector((state: RootState) => state.dialog)
+  const dispatch = useDispatch()
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const handleAccept = (payload) => {
+    console.log('accept', payload)
+    dispatch(closeDialog())
+  }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleCancel = () => dispatch(closeDialog())
+
+  const handleClose = () => dispatch(closeDialog())
 
   return (
     <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Add to Queque Playlist"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {`Do you want to add ${song.name} to playlist?`}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            ACCEPT
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <AcceptDialog dialog={dialog} accept={handleAccept} cancel={handleCancel} close={handleClose} ></AcceptDialog>
     </div>
   );
 }

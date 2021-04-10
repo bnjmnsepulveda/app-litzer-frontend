@@ -57,7 +57,7 @@ export default function SongList() {
 
     return (
         <List className={classes.root}>
-            {songs.map(song => <SongItem song={song} />)}
+            {songs.map(song => <SongItem key={song.id} song={song} />)}
         </List>
     );
 }

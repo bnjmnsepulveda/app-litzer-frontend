@@ -4,11 +4,19 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import { useDispatch } from 'react-redux';
+import { openDialog } from '../../../redux/ducks/dialog.duck';
 
 export default function SongItem({ song }) {
 
-    const handleClick = (e: any) => {
-        console.log(song)
+    const dispatch = useDispatch()
+
+    const handleClick = (song) => {
+        dispatch(openDialog({
+            title: 'Add to Playlist',
+            message: `Do you want to add ${song.name} to queque playlist`,
+            payload: song
+        }))
     }
 
     return (
@@ -18,7 +26,7 @@ export default function SongItem({ song }) {
                     <MusicNoteIcon />
                 </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={song.name} secondary={song.duration} onClick={handleClick} />
+            <ListItemText primary={song.name} secondary={song.duration} onClick={e => handleClick(song)} />
         </ListItem>
     )
 }

@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import SongList from '../SongList/SongList';
+import AddSongDialog from '../AddSongDialog/AddSongDialog';
 
 const useStyles = makeStyles({
     card: {
@@ -23,28 +24,30 @@ export default function Album() {
     const classes = useStyles();
 
     return (
-        <Card className={classes.card}>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt={album.album}
-                    height="140"
-                    image={album.img}
-                    title={album.album}
-                />
+        <div>
+            <Card className={classes.card}>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        alt={album.album}
+                        height="140"
+                        image={album.img}
+                        title={album.album}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {album.artist}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            {album.album}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {album.artist}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {album.album}
-                    </Typography>
+                    <SongList></SongList>
                 </CardContent>
-            </CardActionArea>
-            <CardContent>
-                <SongList></SongList>
-            </CardContent>
-
-        </Card>
+            </Card>
+            <AddSongDialog></AddSongDialog>
+        </div>
     );
 }
