@@ -9,8 +9,8 @@ import SongList from '../SongList/SongList';
 import AddSongDialog from '../AddSongDialog/AddSongDialog';
 import { useParams } from "react-router-dom";
 import useAlbumById from '../../hooks/api/useAlbumById';
-import { LinearProgress } from '@material-ui/core';
-import ErrorMessage from '../../../shared/components/ErrorMessage/ErrorMessage';
+import withLoading from '../../../shared/hocs/withLoading';
+import withError from '../../../shared/hocs/withError';
 
 const useStyles = makeStyles({
     card: {
@@ -20,45 +20,45 @@ const useStyles = makeStyles({
 
 export default function Album() {
 
-    const classes = useStyles();
     let { id } = useParams();
 
     const { loading, error, album } = useAlbumById(id)
 
-    if (loading) {
-        return <LinearProgress />
-    }
-
-    if (error) {
-        console.error(error)
-        return <ErrorMessage error={'Ha ocurrido un error'} message={error.message}></ErrorMessage>
-    }
-
-    return (
-        <div>
-            <Card className={classes.card}>
-                <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        alt={album.name}
-                        height="140"
-                        image={album.img}
-                        title={album.name}
-                    />
+    const AlbumComponent = () => {
+        const classes = useStyles();
+        return (
+            <div>
+                <Card className={classes.card}>
+                    <CardActionArea>
+                        <CardMedia
+                            component="img"
+                            alt={album.name}
+                            height="140"
+                            image={album.img}
+                            title={album.name}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {album.artist}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {album.name}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {album.artist}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            {album.name}
-                        </Typography>
+                        <SongList songs={album.songs}></SongList>
                     </CardContent>
-                </CardActionArea>
-                <CardContent>
-                    <SongList songs={album.songs}></SongList>
-                </CardContent>
-            </Card>
-            <AddSongDialog></AddSongDialog>
-        </div>
-    );
+                </Card>
+                <AddSongDialog></AddSongDialog>
+            </div>
+        );
+    }
+
+    const WithLoadingComponent = withLoading(loading, AlbumComponent)
+    const WithErrorAndLoadingComponent = withError(`Error getting album id ${id}`, error, WithLoadingComponent)
+
+    return <WithErrorAndLoadingComponent />
+
 }
+

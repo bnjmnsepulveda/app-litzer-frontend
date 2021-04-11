@@ -62,9 +62,9 @@ function AlbumList() {
     }
 
     const WithLoadingComponent = withLoading(loading, AlbumListComponent)
-    const WithErrorComponent = withError('Error getting albums', error, WithLoadingComponent)
+    const WithErrorAndLoadingComponent = withError('Error getting albums', error, WithLoadingComponent)
 
-    return <WithErrorComponent />
+    return <WithErrorAndLoadingComponent />
 
 }
 
