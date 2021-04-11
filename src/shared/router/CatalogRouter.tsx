@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
-import AlbumList from './../catalog/components/AlbumList/AlbumList'
-import Album from './../catalog/components/Album/Album'
+import AlbumList from '../../catalog/components/AlbumList/AlbumList'
+import Album from '../../catalog/components/Album/Album'
 
 export default function CatalogRouter() {
 

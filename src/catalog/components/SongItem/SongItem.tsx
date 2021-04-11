@@ -5,7 +5,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import MusicNoteIcon from '@material-ui/icons/MusicNote';
 import { useDispatch } from 'react-redux';
-import { openDialog } from '../../../redux/ducks/dialog.duck';
+import { openDialog } from '../../../shared/redux/ducks/dialog.duck';
 
 export default function SongItem({ song }) {
 

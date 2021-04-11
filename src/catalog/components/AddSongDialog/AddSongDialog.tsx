@@ -1,9 +1,9 @@
 import React from 'react';
 import AcceptDialog from '../../../shared/components/ui/AcceptDialog/AcceptDialog';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { closeDialog } from '../../../redux/ducks/dialog.duck';
-import { addSong } from '../../../redux/ducks/my-queque.duck';
+import { RootState } from '../../../shared/redux/store';
+import { closeDialog } from '../../../shared/redux/ducks/dialog.duck';
+import { addSong } from '../../../shared/redux/ducks/my-queque.duck';
 
 export default function AddSongDialog() {
 
