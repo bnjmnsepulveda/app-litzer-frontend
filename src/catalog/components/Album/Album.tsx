@@ -10,6 +10,7 @@ import AddSongDialog from '../AddSongDialog/AddSongDialog';
 import { useParams } from "react-router-dom";
 import useAlbumById from '../../hooks/api/useAlbumById';
 import { LinearProgress } from '@material-ui/core';
+import ErrorMessage from '../../../shared/components/ErrorMessage/ErrorMessage';
 
 const useStyles = makeStyles({
     card: {
@@ -30,7 +31,7 @@ export default function Album() {
 
     if (error) {
         console.error(error)
-        return <h1>Un error ha ocurrido</h1>
+        return <ErrorMessage error={'Ha ocurrido un error'} message={error.message}></ErrorMessage>
     }
 
     return (
@@ -54,7 +55,7 @@ export default function Album() {
                     </CardContent>
                 </CardActionArea>
                 <CardContent>
-                    <SongList></SongList>
+                    <SongList songs={album.songs}></SongList>
                 </CardContent>
             </Card>
             <AddSongDialog></AddSongDialog>
