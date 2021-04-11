@@ -7,6 +7,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import SongList from '../SongList/SongList';
 import AddSongDialog from '../AddSongDialog/AddSongDialog';
+import { useParams } from "react-router-dom";
+import useAlbumById from '../../hooks/api/useAlbumById';
+import { LinearProgress } from '@material-ui/core';
 
 const useStyles = makeStyles({
     card: {
@@ -14,14 +17,21 @@ const useStyles = makeStyles({
     },
 });
 
-const album = {
-    img: 'https://images-na.ssl-images-amazon.com/images/I/41X8BFZD2WL.jpg',
-    artist: 'Bon Jovi',
-    album: 'Runnaway',
-}
-
 export default function Album() {
+
     const classes = useStyles();
+    let { id } = useParams();
+
+    const { loading, error, album } = useAlbumById(id)
+
+    if (loading) {
+        return <LinearProgress />
+    }
+
+    if (error) {
+        console.error(error)
+        return <h1>Un error ha ocurrido</h1>
+    }
 
     return (
         <div>
@@ -29,17 +39,17 @@ export default function Album() {
                 <CardActionArea>
                     <CardMedia
                         component="img"
-                        alt={album.album}
+                        alt={album.name}
                         height="140"
                         image={album.img}
-                        title={album.album}
+                        title={album.name}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             {album.artist}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            {album.album}
+                            {album.name}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

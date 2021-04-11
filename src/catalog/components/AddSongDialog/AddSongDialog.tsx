@@ -1,5 +1,5 @@
 import React from 'react';
-import AcceptDialog from '../../../shared/components/ui/AcceptDialog/AcceptDialog';
+import AcceptDialog from '../../../shared/components/AcceptDialog/AcceptDialog';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../shared/redux/store';
 import { closeDialog } from '../../../shared/redux/ducks/dialog.duck';
